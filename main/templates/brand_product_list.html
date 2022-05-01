@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="container my-4">
+	<div class="row">
+		<!-- Filters -->
+		{% comment %} <div class="col-md-3">
+			{% include 'filters.html' %}
+		</div> {% endcomment %}
+		<div class="col-md-9">
+			<!-- Products -->
+			<h3 class="mb-4 border-bottom pb-1">
+				Products
+			</h3>
+            {% if brand_products %}
+			<div class="row">
+                {% for brand_product in brand_products %}
+				<div class="col-md-4 mb-4">
+					<div class="card shadow">
+					  <a href="/product/{{brand_product.slug}}/{{brand_product.id}}"><img src="/media/{{brand_product.productattribute_set.first.image}}" class="card-img-top" alt="{{brand_product.title}}"></a>
+					  <div class="card-body">
+					    <h6 class="card-text"><a href="#">{{brand_product.title}}</a></h6>
+					  </div>
+					  <div class="card-footer">
+					  	<button class="btn btn-sm btn-primary"><i class="fa fa-shopping-cart"></i></button>
+					  	<button class="btn btn-sm btn-danger"><i class="fa fa-heart"></i></button>
+					  	<span class="float-right">
+					  		4.5/5
+					  		<i class="fa fa-star text-warning"></i>
+					  	</span>
+					  </div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+            {% endif %}
+			<p class="my-4 text-center"><a href="/products.php" class="btn btn-dark btn-sm">Load More <i class="fa fa-sync"></i></a></p>
+		</div>
+	</div>
+</main>
+{% endblock %}
